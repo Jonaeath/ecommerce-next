@@ -8,6 +8,7 @@ import logo from "../../../public/logo.jpg";
 import { GrTransaction } from "react-icons/gr";
 import { IoAnalytics, IoSettings } from "react-icons/io5";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const menus = [
   {
@@ -43,6 +44,8 @@ const menus = [
 ];
 
 const Sidebar = () => {
+  const pathName = usePathname();
+
   return (
     <div className="w-[300px] min-h-screen p-4 shrink-0">
       <div className="flex items-center gap-4">
@@ -54,7 +57,11 @@ const Sidebar = () => {
           <Link
             key={menu.title}
             href={menu.href}
-            className="flex gap-2 items-center p-4 rounded-lg cursor-pointer hover: bg-orange-600 hover:bg-amber-500"
+            className={`flex gap-2 items-center p-4 rounded-lg cursor-pointer hover: bg-orange-600 hover:text-white ${
+              pathName === menu.href
+                ? "bg-orange-600 hover:text-white"
+                : "bg-lime-500"
+            }`}
           >
             <div className="text-[20px] font-semibold">{menu.icon}</div>
             <p>{menu.title}</p>
